@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>讓AI解決我的生活大小事</title>
+
+
+<style>
+
+/* ================================
+   整體頁面
+   ================================ */
+
+body {
+
+    font-family:
+        Arial,
+        "Noto Sans TC",
+        sans-serif;
+
+    background: #f5f7fa;
+
+    margin: 0;
+
+    padding: 20px;
+
+}
+
+
+/* ================================
+   主容器
+   ================================ */
+
+.container {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.1);
+
+}
+
+
+/* ================================
+   標題
+   ================================ */
+
+h1 {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ================================
+   GitHub 設定區
+   ================================ */
+
+.github-setting {
+
+    background: #f0f2f5;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.setting-row {
+
+    display: flex;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+}
+
+
+.setting-row:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+.setting-row label {
+
+    width: 130px;
+
+    font-weight: bold;
+
+}
+
+
+.setting-row input {
+
+    flex: 1;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+
+}
+
+
+.setting-row input:focus {
+
+    outline: none;
+
+    border-color: #0969da;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(9,105,218,0.15);
+
+}
+
+
+/* ================================
+   儲存庫資訊
+   ================================ */
+
+.info {
+
+    text-align: center;
+
+    color: #666;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ================================
+   工具列
+   ================================ */
+
+.toolbar {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+}
+
+
+button {
+
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    background: #24292f;
+
+    color: white;
+
+    font-size: 15px;
+
+}
+
+
+button:hover {
+
+    opacity: 0.8;
+
+}
+
+
+/* 載入按鈕 */
+
+.btn-load {
+
+    background: #0969da;
+
+}
+
+
+/* 下載按鈕 */
+
+.btn-download {
+
+    background: #238636;
+
+}
+
+
+/* ================================
+   目前路徑
+   ================================ */
+
+.path {
+
+    background: #f0f2f5;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+
+    font-weight: bold;
+
+}
+
+
+/* ================================
+   檔案列
+   ================================ */
+
+.file {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 14px;
+
+    border-bottom:
+        1px solid #eee;
+
+}
+
+
+.file:hover {
+
+    background: #f8f9fa;
+
+}
+
+
+/* ================================
+   檔案名稱
+   ================================ */
+
+.name {
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+.folder {
+
+    font-weight: bold;
+
+}
+
+
+/* ================================
+   檔案類型
+   ================================ */
+
+.type {
+
+    color: #888;
+
+    font-size: 13px;
+
+    margin-left: 10px;
+
+}
+
+
+/* ================================
+   開啟連結
+   ================================ */
+
+a {
+
+    text-decoration: none;
+
+    color: #0969da;
+
+    font-weight: bold;
+
+}
+
+
+/* ================================
+   載入中
+   ================================ */
+
+.loading {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777;
+
+}
+
+
+/* ================================
+   錯誤訊息
+   ================================ */
+
+.error {
+
+    color: red;
+
+    text-align: center;
+
+    padding: 20px;
+
+}
+
+
+/* ================================
+   成功訊息
+   ================================ */
+
+.success {
+
+    color: #238636;
+
+    text-align: center;
+
+    padding: 10px;
+
+    font-weight: bold;
+
+}
+
+
+/* ================================
+   手機版
+   ================================ */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 10px;
+
+    }
+
+
+    .container {
+
+        padding: 15px;
+
+    }
+
+
+    .setting-row {
+
+        display: block;
+
+    }
+
+
+    .setting-row label {
+
+        display: block;
+
+        width: auto;
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .setting-row input {
+
+        width: 100%;
+
+    }
+
+
+    .file {
+
+        padding: 12px 5px;
+
+    }
+
+
+    .name {
+
+        font-size: 14px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================
+         標題
+         ================================ -->
+
+    <h1>
+
+讓AI解決我的生活大小事<br>115秋季班<br>📦GitHUB儲存庫空間的檔案
+
+    </h1>
+
+
+    <!-- ================================
+         GitHub 設定
+         ================================ -->
+
+    <div class="github-setting">
+
+
+        <div class="setting-row">
+
+            <label for="githubUser">
+
+                GitHub帳號
+
+            </label>
+
+
+            <input type="text" id="githubUser" value="cchoutlook">
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <label for="githubRepo">
+
+                儲存庫名稱
+
+            </label>
+
+
+            <input type="text" id="githubRepo" value="AI">
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================================
+         儲存庫資訊
+         ================================ -->
+
+    <div class="info">
+
+        儲存庫：
+
+        <strong id="repoName">
+
+            AI
+
+        </strong>
+
+
+        &nbsp;&nbsp;
+
+
+        分支：
+
+        <strong id="branchName">
+
+            main
+
+        </strong>
+
+    </div>
+
+
+    <!-- ================================
+         按鈕
+         ================================ -->
+
+    <div class="toolbar">
+
+
+        <button class="btn-load" onclick="startLoad()">
+
+            🔍 載入儲存庫
+
+        </button>
+
+
+        <button onclick="goBack()">
+
+            ⬅ 返回
+
+        </button>
+
+
+        <button onclick="loadFiles()">
+
+            🔄 重新整理
+
+        </button>
+
+
+        <button class="btn-download" onclick="downloadHTML()">
+
+            📥 下載此網頁index.html
+
+        </button>
+
+
+    </div>
+
+
+    <!-- ================================
+         目前路徑
+         ================================ -->
+
+    <div class="path" id="currentPath">
+
+        📁 /
+
+    </div>
+
+
+    <!-- ================================
+         檔案清單
+         ================================ -->
+
+    <div id="fileList">
+
+        <div class="loading">
+
+            請輸入 GitHub 帳號與儲存庫名稱，
+            然後按「🔍 載入儲存庫」
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   ★★★ Branch 設定 ★★★
+   ========================================= */
+
+const GITHUB_BRANCH = "main";
+
+
+/* =========================================
+   目前所在路徑
+   ========================================= */
+
+let currentPath = "";
+
+
+/* =========================================
+   瀏覽歷史
+   ========================================= */
+
+let historyPath = [];
+
+
+/* =========================================
+   取得 GitHub 帳號
+   ========================================= */
+
+function getGitHubUser() {
+
+    return document
+        .getElementById("githubUser")
+        .value
+        .trim();
+
+}
+
+
+/* =========================================
+   取得 GitHub 儲存庫
+   ========================================= */
+
+function getGitHubRepo() {
+
+    return document
+        .getElementById("githubRepo")
+        .value
+        .trim();
+
+}
+
+
+/* =========================================
+   顯示儲存庫名稱
+   ========================================= */
+
+function updateRepositoryInfo() {
+
+    document
+        .getElementById("repoName")
+        .textContent =
+        getGitHubRepo();
+
+
+    document
+        .getElementById("branchName")
+        .textContent =
+        GITHUB_BRANCH;
+
+}
+
+
+/* =========================================
+   取得 GitHub Pages 網址
+   ========================================= */
+
+function getGitHubPages() {
+
+    const user =
+        getGitHubUser();
+
+    const repo =
+        getGitHubRepo();
+
+
+    return `https://${user}.github.io/${repo}/`;
+
+}
+
+
+/* =========================================
+   開始載入儲存庫
+   ========================================= */
+
+function startLoad() {
+
+
+    const user =
+        getGitHubUser();
+
+
+    const repo =
+        getGitHubRepo();
+
+
+    /* 檢查 GitHub 帳號 */
+
+    if (!user) {
+
+        alert(
+            "請輸入 GitHub 帳號！"
+        );
+
+        document
+            .getElementById("githubUser")
+            .focus();
+
+        return;
+
+    }
+
+
+    /* 檢查儲存庫 */
+
+    if (!repo) {
+
+        alert(
+            "請輸入 GitHub 儲存庫名稱！"
+        );
+
+        document
+            .getElementById("githubRepo")
+            .focus();
+
+        return;
+
+    }
+
+
+    /* 清除瀏覽歷史 */
+
+    currentPath = "";
+
+    historyPath = [];
+
+
+    /* 更新顯示 */
+
+    updateRepositoryInfo();
+
+
+    /* 開始讀取 */
+
+    loadFiles("");
+
+}
+
+
+/* =========================================
+   讀取 GitHub 檔案
+   ========================================= */
+
+async function loadFiles(
+    path = currentPath
+) {
+
+
+    const user =
+        getGitHubUser();
+
+
+    const repo =
+        getGitHubRepo();
+
+
+    if (!user || !repo) {
+
+        return;
+
+    }
+
+
+    currentPath = path;
+
+
+    /* 顯示目前路徑 */
+
+    document
+        .getElementById("currentPath")
+        .innerHTML =
+        "📁 /" +
+        (path || "");
+
+
+    const fileList =
+        document
+            .getElementById("fileList");
+
+
+    /* 顯示讀取中 */
+
+    fileList.innerHTML =
+
+        '<div class="loading">' +
+
+        '正在讀取 GitHub 檔案……' +
+
+        '</div>';
+
+
+    /* GitHub API */
+
+    const apiURL =
+
+        `https://api.github.com/repos/` +
+
+        `${encodeURIComponent(user)}/` +
+
+        `${encodeURIComponent(repo)}/contents/` +
+
+        `${path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`;
+
+
+    try {
+
+
+        const response =
+            await fetch(apiURL);
+
+
+        /* API 錯誤 */
+
+        if (!response.ok) {
+
+            if (response.status === 404) {
+
+                throw new Error(
+                    "找不到此 GitHub 儲存庫，" +
+                    "請確認帳號、儲存庫名稱及 main 分支是否正確。"
+                );
+
+            }
+
+
+            throw new Error(
+                "GitHub API 讀取失敗：" +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /* 清除原本內容 */
+
+        fileList.innerHTML = "";
+
+
+        /* ================================
+           如果取得的是單一檔案
+           ================================ */
+
+        if (!Array.isArray(data)) {
+
+            showFile(data);
+
+            return;
+
+        }
+
+
+        /* ================================
+           排序
+           資料夾在前
+           檔案在後
+           ================================ */
+
+        data.sort(
+            (a, b) => {
+
+
+                if (
+                    a.type === b.type
+                ) {
+
+                    return a.name
+                        .localeCompare(
+                            b.name
+                        );
+
+                }
+
+
+                return
+                    a.type === "dir"
+                    ? -1
+                    : 1;
+
+            }
+        );
+
+
+        /* ================================
+           顯示所有項目
+           ================================ */
+
+        data.forEach(
+            item => {
+
+                showItem(item);
+
+            }
+        );
+
+
+        /* 如果沒有檔案 */
+
+        if (data.length === 0) {
+
+            fileList.innerHTML =
+
+                '<div class="loading">' +
+
+                '📂 此資料夾目前沒有檔案' +
+
+                '</div>';
+
+        }
+
+
+    }
+
+    catch (error) {
+
+
+        fileList.innerHTML =
+
+            `<div class="error">
+
+                ❌ 無法讀取 GitHub 檔案
+
+                <br><br>
+
+                ${error.message}
+
+            </div>`;
+
+    }
+
+}
+
+
+/* =========================================
+   顯示檔案 / 資料夾
+   ========================================= */
+
+function showItem(item) {
+
+
+    const div =
+        document.createElement("div");
+
+
+    div.className = "file";
+
+
+    const left =
+        document.createElement("div");
+
+
+    const name =
+        document.createElement("span");
+
+
+    name.className = "name";
+
+
+    /* ================================
+       資料夾
+       ================================ */
+
+    if (item.type === "dir") {
+
+
+        name.classList.add(
+            "folder"
+        );
+
+
+        name.innerHTML =
+            "📁 " +
+            item.name;
+
+
+        name.onclick =
+            function() {
+
+
+                /* 記錄目前位置 */
+
+                historyPath.push(
+                    currentPath
+                );
+
+
+                /* 進入資料夾 */
+
+                loadFiles(
+                    item.path
+                );
+
+            };
+
+
+    }
+
+
+    /* ================================
+       檔案
+       ================================ */
+
+    else {
+
+
+        name.innerHTML =
+
+            getIcon(item.name) +
+
+            " " +
+
+            item.name;
+
+
+        name.onclick =
+            function() {
+
+
+                /*
+                 ★ 直接開啟 GitHub Pages
+                */
+
+                const pageURL =
+
+                    getGitHubPages() +
+                    item.path;
+
+
+                window.open(
+                    pageURL,
+                    "_blank"
+                );
+
+            };
+
+    }
+
+
+    /* 加入名稱 */
+
+    left.appendChild(name);
+
+
+    /* ================================
+       檔案類型
+       ================================ */
+
+    const type =
+        document.createElement("span");
+
+
+    type.className = "type";
+
+
+    type.textContent =
+
+        item.type === "dir"
+
+        ? "資料夾"
+
+        : getFileType(
+            item.name
+        );
+
+
+    left.appendChild(type);
+
+
+    div.appendChild(left);
+
+
+    /* ================================
+       開啟按鈕
+       ================================ */
+
+    if (item.type === "file") {
+
+
+        const link =
+            document.createElement("a");
+
+
+        /*
+         ★ GitHub Pages 網址
+        */
+
+        link.href =
+
+            getGitHubPages() +
+            item.path;
+
+
+        link.target = "_blank";
+
+
+        link.textContent =
+            "開啟";
+
+
+        div.appendChild(link);
+
+    }
+
+
+    /* 加入網頁 */
+
+    document
+        .getElementById("fileList")
+        .appendChild(div);
+
+}
+
+
+/* =========================================
+   顯示單一檔案
+   ========================================= */
+
+function showFile(item) {
+
+
+    const div =
+        document.createElement("div");
+
+
+    div.className = "file";
+
+
+    /*
+     ★ GitHub Pages 網址
+    */
+
+    const pageURL =
+
+        getGitHubPages() +
+        item.path;
+
+
+    div.innerHTML =
+
+        getIcon(item.name) +
+
+        " " +
+
+        item.name +
+
+        ' <a href="' +
+
+        pageURL +
+
+        '" target="_blank">' +
+
+        '開啟' +
+
+        '</a>';
+
+
+    document
+        .getElementById("fileList")
+        .appendChild(div);
+
+}
+
+
+/* =========================================
+   判斷檔案圖示
+   ========================================= */
+
+function getIcon(filename) {
+
+
+    const ext =
+
+        filename
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    if (
+        ext === "html" ||
+        ext === "htm"
+    )
+
+        return "🌐";
+
+
+    if (ext === "pdf")
+
+        return "📕";
+
+
+    if (
+        ext === "jpg" ||
+        ext === "jpeg" ||
+        ext === "png" ||
+        ext === "gif" ||
+        ext === "webp"
+    )
+
+        return "🖼️";
+
+
+    if (ext === "js")
+
+        return "📜";
+
+
+    if (ext === "css")
+
+        return "🎨";
+
+
+    if (ext === "txt")
+
+        return "📄";
+
+
+    if (
+        ext === "doc" ||
+        ext === "docx"
+    )
+
+        return "📝";
+
+
+    if (
+        ext === "xls" ||
+        ext === "xlsx"
+    )
+
+        return "📊";
+
+
+    return "📄";
+
+}
+
+
+/* =========================================
+   顯示檔案類型
+   ========================================= */
+
+function getFileType(filename) {
+
+
+    const ext =
+
+        filename
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    return ext.toUpperCase() +
+           " 檔案";
+
+}
+
+
+/* =========================================
+   返回上一層
+   ========================================= */
+
+function goBack() {
+
+
+    /* 如果有歷史紀錄 */
+
+    if (
+        historyPath.length > 0
+    ) {
+
+
+        const previousPath =
+            historyPath.pop();
+
+
+        loadFiles(
+            previousPath
+        );
+
+
+        return;
+
+    }
+
+
+    /* 已經在根目錄 */
+
+    if (
+        currentPath !== ""
+    ) {
+
+
+        currentPath = "";
+
+
+        loadFiles("");
+
+    }
+
+}
+
+
+/* =========================================
+   ★★★ 下載目前完整 HTML ★★★
+   檔名：index.html
+   ========================================= */
+
+function downloadHTML() {
+
+
+    /*
+     * 先取得目前輸入的帳號與儲存庫
+     */
+
+    const userInput =
+        document
+            .getElementById("githubUser");
+
+
+    const repoInput =
+        document
+            .getElementById("githubRepo");
+
+
+    /*
+     * 將目前輸入的內容
+     * 寫入 HTML 的 value 屬性
+     *
+     * 這樣下載後再次開啟 index.html
+     * 還會保留目前輸入的設定。
+     */
+
+    userInput.setAttribute(
+        "value",
+        userInput.value
+    );
+
+
+    repoInput.setAttribute(
+        "value",
+        repoInput.value
+    );
+
+
+    /*
+     * 複製整個 HTML 文件
+     */
+
+    const html =
+        "<!DOCTYPE html>\n" +
+        document.documentElement.outerHTML;
+
+
+    /*
+     * 建立 Blob
+     */
+
+    const blob =
+        new Blob(
+            [html],
+            {
+                type:
+                    "text/html;charset=utf-8"
+            }
+        );
+
+
+    /*
+     * 建立下載網址
+     */
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    /*
+     * 建立下載連結
+     */
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+
+    /*
+     * ★ 固定下載檔名
+     */
+
+    link.download =
+        "index.html";
+
+
+    /*
+     * 執行下載
+     */
+
+    document.body.appendChild(link);
+
+    link.click();
+
+
+    /*
+     * 清理
+
+     */
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+
+    /*
+     * 提示使用者
+     */
+
+    alert(
+        "✅ 已下載 index.html"
+    );
+
+}
+
+</script>
+
+
+
+
+</body></html>
